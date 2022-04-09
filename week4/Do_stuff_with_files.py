@@ -70,21 +70,22 @@ def menu():
             
             if option == 1:
                     read_first_line()    
-                    menu()
+                    
             elif option==2:                   
                     append_lines()                    
                     menu()
             elif option== 3:
                 read_n_lines()
                 clean_screen()          
-                menu()
+                
                 
             elif option == 4:
                 read_text_list()
                 clean_screen()
-                menu()
+            
                 
             elif option == 5:
+                os.system('cls')
                 print("Session ended\n")
                 estate=False
                 

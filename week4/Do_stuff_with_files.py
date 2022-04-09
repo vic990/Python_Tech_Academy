@@ -61,12 +61,13 @@ def read_text_list():
 def menu():    
     estate=True
     
-    while estate:    
+    while estate:  
+        os.system('cls')
+        print("1.Read first lines\n2.add more text to the file\n3.Read a number of lines\n4.Get the whole text into a list\n5.Exit")
+        option=int(input())  
         
         try:
-            os.system('cls')
-            print("1.Read first lines\n2.add more text to the file\n3.Read a number of lines\n4.Get the whole text into a list\n5.Exit")
-            option=int(input())
+            
             if option == 1:
                     read_first_line()    
                     menu()
@@ -88,7 +89,7 @@ def menu():
                 estate=False
                 
         except ValueError:
-            pass
+            estate=False
         
         
 menu()

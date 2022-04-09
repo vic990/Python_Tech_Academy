@@ -1,10 +1,6 @@
 from persona_class import Employee
 
 
- #employee1= Employee(503750420,"alonso","carballo sanchez", 8, 2500)
-
-
-
 list_of_emps =[]
 
 
@@ -21,7 +17,7 @@ def add_employee(id, name,last_name, salary_per_hour):
         print("Employee added")
         
         
- #check if the employee is added and returns a bool   
+#check if the employee is added and returns a bool   
 def verify_emp(id):
     for emp in list_of_emps:
         if id == emp['ID']:
@@ -30,16 +26,17 @@ def verify_emp(id):
             return False
    
 #delete Employee 
-def delete_emp(id):
-      if check_empty():
-          print("There are no Employees.")
-      else:
+def delete_emp(id):     
+          
+      if verify_emp(id):
           cont=0
           for emp in list_of_emps:
               if emp['ID'] == id :                
                 list_of_emps.pop(cont)               
               cont+=1   
           print("Employee deleted")
+      else:
+            print("Employee doesn't exist.")
               
   
 #check if list is empty, if not empty return false
@@ -48,15 +45,15 @@ def check_empty(listemps=list_of_emps):
     
 #Search an employee
 def search_emp(id):      
-    if check_empty():
-        print("No employees to show")       
-    else:        
+    if verify_emp(id):
         for emp in list_of_emps:
             if emp['ID'] == id:            
                 print(f'ID: {emp["ID"]}') 
                 print(f'Name: {emp["Name"]}') 
                 print(f'Last Name: {emp["Last_name"]}') 
                 print(f'Salary per hour: {emp["Salary_per_hour"]}') 
+    else:        
+        print("Employee doesn't exist.")       
         
          
                 
@@ -64,14 +61,18 @@ def search_emp(id):
 #it calculates the salary     
 def cal_salary(id):
     
-    sub_total= lambda x,y :  x * y
-    for emp in list_of_emps:
-            if emp['ID'] == id:
-              worked_hours=float(input("Amount of hours: "))
-              salary = sub_total(worked_hours, emp['Salary_per_hour'])
-              create_txt(emp['Name'],emp['Last_name'], salary)
-              print("--> file created <--")     
-                     
+    if verify_emp(id):
+        sub_total= lambda x,y :  x * y
+        for emp in list_of_emps:
+                if emp['ID'] == id:
+                    worked_hours=float(input("Amount of hours: "))
+                    salary = sub_total(worked_hours, emp['Salary_per_hour'])
+                    create_txt(emp['Name'],emp['Last_name'], salary)
+                    print("--> file created <--")     
+    else:
+        print("Employee doesn't exist")      
+        
+                   
 #creates the txt
 def create_txt(name,last_name,salary):
     with open('P2 test.text',"w", encoding= 'utf-8') as myfile:
@@ -82,14 +83,6 @@ def create_txt(name,last_name,salary):
         myfile.write(f'** Name: {name}\n')
         myfile.write(f'** Last Name: {last_name}\n')
         myfile.write(f'** Salary per hour: {salary}\n')
-
-
-add_employee(503750420,"alonso","carballo sanchez", 2500)    
-add_employee(234534535,"jose","carballo sanchez", 2500)  
-add_employee(537485734,"vero","carballo sanchez", 200) 
-
-
-
 
 
 
